@@ -1,90 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://code.jquery,com/jquery-3.5.0.js"></script>
-    <link rel="stylesheet" href="styles.css">
-
-</head>
-<body>
-    
-    <nav>
-        <div class="logo">Tienda de libros/vinilos</div>
-        <label for="btn" class="icon">
-            <span class="fa fa-bars"></span>
-        </label>
-        <input type="checkbox" id="btn">
-        <ul>
-            <li>
-                <a href="#">Nosotros</a>
-            </li>
-            <li>
-                <label for="btn-1" class="show">Features +</label>
-                <a href="#">Categorias</a>
-                <input type="checkbox" id="btn-1">
-                <ul>
-                    <li>
-                        <a href="#"> Infantil</a>
-                    </li>
-                    <li>
-                        <a href="#">Juvenil</a>
-                    </li>
-                    <li>
-                        <a href="#">Mas de 15</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <label for="btn-2" class="show">Generos +</label>
-                <a href="#">Generos</a>
-                <input type="checkbox" id="btn-2">
-                <ul>
-                    <li>
-                        <a href="#">Fantasia</a>
-                    </li>
-                    <li>
-                        <a href="#"> Guerra</a>
-                    </li>
-                    <li>
-                        <label for="btn-3" class="show">More +</label>
-                        <a href="#">Mas 
-                            <span class="fa fa-plus"></span>
-                        </a>
-                        <input type="checkbox" id="btn-3">
-                        <ul>
-                            <li>
-                                <a href="#">Comics</a>
-                            </li>
-                            <li>
-                                <a href="#">Poesia</a>
-                            </li>
-                            <li>
-                                <a href="#">Mangas</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="ingresar.html">Ingresar</a>
-            </li>
-            <li>
-                <a href="contacto.html">Contacto</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="content">
-        <header>Aca irian libros</header>
-        <p>O vinilos o lo que sea </p>
-    </div>
-    <script>
-        $('.icon').click(function () 
-        {
-            $('span').toggleClass("cancel");
-        });
-    </script>
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="navbar-container"></div>
+        <div id="display-div"></div>
+        <script type='module'src="index.js" defer></script>
+    </body>
 </html>
