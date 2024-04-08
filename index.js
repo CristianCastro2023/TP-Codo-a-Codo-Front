@@ -80,13 +80,29 @@ const navBar = (arr, name) => {
         wishlistDisplay(books)
          
     })
+
+    shoppingCart.addEventListener('click', ()=>{
+        displayDiv.innerHTML=''
+        shoppingCartDisplay()
+    })
 }
 
-// const homeDisplay = () =>{
-//     const homeContainer = document.createElement('div')
-//     homeContainer.setAttribute('id', 'home')
-//     body.appendChild(homeContainer)
-// }
+const homeDisplay = () =>{
+    const homeContainer = document.createElement('div')
+    homeContainer.setAttribute('id', 'home')
+    displayDiv.appendChild(homeContainer)
+
+    const placeholder = document.createElement('div')
+    placeholder.setAttribute('id','placeholder')
+    placeholder.textContent='placeholder para info del home'
+
+    const footer = document.createElement('div');
+    footer.setAttribute("id", "footer");
+    footer.textContent ='placeholder para el footer'
+    
+    homeContainer.appendChild(placeholder)
+    homeContainer.appendChild(footer)
+}
 
 const categoriesDisplay = (category, books) => {
     let mainDiv = document.querySelector('#main-div');
@@ -198,8 +214,13 @@ const wishlistDisplay = (books) =>{
     }) 
 }
 
-
+const shoppingCartDisplay = (books) => {
+    const modalBackground = document.createElement( "div" );
+    modalBackground.setAttribute("id", "modal-background");
+    body.appendChild(modalBackground);
+}
 
 navBar(categories, currentPageTitle);
+homeDisplay();
 
 
