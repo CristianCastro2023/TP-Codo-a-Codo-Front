@@ -83,7 +83,7 @@ const navBar = (arr, name) => {
 
     shoppingCart.addEventListener('click', ()=>{
         displayDiv.innerHTML=''
-        shoppingCartDisplay()
+        shoppingCartDisplay(books)
     })
 }
 
@@ -218,6 +218,68 @@ const shoppingCartDisplay = (books) => {
     const modalBackground = document.createElement( "div" );
     modalBackground.setAttribute("id", "modal-background");
     body.appendChild(modalBackground);
+
+    const shoppingCartContainer = document.createElement( "div" );
+    shoppingCartContainer.setAttribute("id","shoppingcart-container")
+    modalBackground.appendChild(shoppingCartContainer)
+
+    const closeButtonContainer = document.createElement("div");
+    closeButtonContainer.setAttribute('id', 'close-btn-container')
+    shoppingCartContainer.appendChild(closeButtonContainer)
+
+    const closeButton = document.createElement("button");
+    closeButton.setAttribute("id", "close-button");
+    closeButton.textContent = 'X'
+    closeButtonContainer.appendChild(closeButton)
+
+    const shoppingCartCover = document.createElement('div')
+    shoppingCartCover.setAttribute('id','shoppingcart-cover');
+    shoppingCartContainer.appendChild(shoppingCartCover)
+
+    const bookCover = document.createElement('div')
+    bookCover.setAttribute('id', 'book-cover')
+    shoppingCartCover.appendChild(bookCover)
+
+    const bookCoverContent = document.createElement('img')
+    bookCoverContent.setAttribute('id', 'book-cover-content')
+    bookCoverContent.setAttribute('src', `${books[0].cover}`)
+    bookCoverContent.setAttribute('alt', `${books[0].title}`)
+    bookCover.appendChild(bookCoverContent)
+
+    const bookInfo = document.createElement( "div" )
+    bookInfo.setAttribute('id', 'book-info')
+    shoppingCartCover.appendChild(bookInfo)
+
+    const bookTitle = document.createElement('h2')
+    bookTitle.textContent= books[0].title; 
+
+    const bookPrice  = document.createElement('h1')
+    bookPrice.textContent=`Total: ${books[0].price}`
+
+    const additionalInfo = document.createElement('p')
+    additionalInfo.textContent = 'Envío sin costo!'
+
+    bookInfo.appendChild(bookTitle)
+    bookInfo.appendChild(bookPrice)
+    bookInfo.appendChild(additionalInfo)
+
+    const operationBtnContainer = document.createElement("div");
+    operationBtnContainer.setAttribute("id", "operation-btn-container");
+    shoppingCartContainer.appendChild(operationBtnContainer)
+
+    const buyButton = document.createElement("button");
+    const cancelButton = document.createElement("button");
+    buyButton.textContent = "comprar"
+    cancelButton.textContent = 'cancelar'
+
+    operationBtnContainer.appendChild(buyButton)
+    operationBtnContainer.appendChild(cancelButton)
+
+    buyButton.onclick =()=>{console.log('comprado')}
+    cancelButton.onclick =()=>{console.log('cancelado')}
+
+    closeButton.onclick = () =>{homeDisplay()}
+
 }
 
 navBar(categories, currentPageTitle);

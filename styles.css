@@ -173,4 +173,59 @@ body{
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#shoppingcart-container{
+    height: 50vh;
+    width: 65vw;
+    background-color: antiquewhite;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#close-button{
+    margin: 20px;
+    height: 30px;
+    width: 30px;
+    
+}
+
+#close-btn-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    width: inherit;
+}
+
+#operation-btn-container{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: 10px;
+    gap: 20px;    
+}
+
+#shoppingcart-cover{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+#book-cover-content{
+    height: 200px;
+    width: 160px;
+    margin-left: 30px;
+}
+
+#book-info{
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
