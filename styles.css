@@ -262,13 +262,18 @@ cursor: pointer;
 }
 
 #shoppingcart-container{
-    height: 50vh;
+    height: 80vh;
     width: 65vw;
     background-color: antiquewhite;
     border-radius: 28px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.shoppingcart-container-large > #shopping-cart-display{
+    overflow-y: scroll ;
+    max-height: 55vh;
 }
 
 #close-button{
@@ -297,6 +302,14 @@ cursor: pointer;
     flex-direction: row;
     justify-content: flex-start;
     width: 100%;
+}
+
+#shopping-cart-display{
+    width: 90%;
+}
+
+.shoppingcart-container-large > #shopping-cart-display{
+    overflow-y: scroll;
 }
 
 #book-cover-content{

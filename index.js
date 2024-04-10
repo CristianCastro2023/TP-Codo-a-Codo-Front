@@ -4,6 +4,8 @@ const books = displayBooks
 
 const favBooks = []
 
+const cartArray = []
+
 const categories = ['ficción', 'historia', 'recetas', 'cómics'];
 let currentPageTitle = 'AUREA';
 
@@ -96,7 +98,7 @@ const navBar = (arr, name) => {
 
     shoppingCart.addEventListener('click', ()=>{
         displayDiv.innerHTML=''
-        shoppingCartDisplay(books)
+        shoppingCartDisplay(cartArray)
     })
 }
 
@@ -132,7 +134,6 @@ const categoriesDisplay = (category, books) => {
     const coverContainer = document.createElement('div');
     mainDiv.appendChild(coverContainer);
     coverContainer.setAttribute('id','cover-container');
-    console.log(books)
 
     const filteredBooks = books.filter(book => book.category === category);
 
@@ -155,6 +156,10 @@ const categoriesDisplay = (category, books) => {
 
         const buyButton = document.createElement('button')
         buyButton.textContent = 'Comprar'
+        buyButton.onclick = () => {
+            cartArray.push(book);
+            console.log(cartArray);
+        }
 
         const favButton = document.createElement('button')
         favButton.textContent = '❤️'
@@ -162,7 +167,6 @@ const categoriesDisplay = (category, books) => {
         favButton.onclick= ()=> {
             const title = bookContainer.id 
             favBooks.push(title)
-            console.log(favBooks)
         }
 
         const bookCover = document.createElement('img');
@@ -179,9 +183,6 @@ const categoriesDisplay = (category, books) => {
 
         coverContainer.appendChild(bookContainer);
 
-        buyButton.addEventListener('click', ()=>{
-            console.log('comprado!')
-        })
     });
 
     const seeMoreButton = document.createElement('button');
@@ -192,6 +193,9 @@ const categoriesDisplay = (category, books) => {
         console.log('Ver más!')
     })
 }
+
+
+
 
 const wishlistDisplay = (favBooks) =>{
     const wishlistContainer=document.createElement('div');
@@ -243,7 +247,7 @@ const wishlistDisplay = (favBooks) =>{
     }) 
 }
 
-const shoppingCartDisplay = (books) => {
+const shoppingCartDisplay = (cartArray) => {
     const modalBackground = document.createElement( "div" );
     modalBackground.setAttribute("id", "modal-background");
     body.appendChild(modalBackground);
@@ -251,6 +255,7 @@ const shoppingCartDisplay = (books) => {
     const shoppingCartContainer = document.createElement( "div" );
     shoppingCartContainer.setAttribute("id","shoppingcart-container")
     modalBackground.appendChild(shoppingCartContainer)
+    cartArray.length > 1 ? shoppingCartContainer.classList.add('shoppingcart-container-large') : ''
 
     const closeButtonContainer = document.createElement("div");
     closeButtonContainer.setAttribute('id', 'close-btn-container')
@@ -261,36 +266,44 @@ const shoppingCartDisplay = (books) => {
     closeButton.textContent = 'X'
     closeButtonContainer.appendChild(closeButton)
 
-    const shoppingCartCover = document.createElement('div')
-    shoppingCartCover.setAttribute('id','shoppingcart-cover');
-    shoppingCartContainer.appendChild(shoppingCartCover)
+    const shoppingCartDisplay = document.createElement('div')
+    shoppingCartContainer.appendChild(shoppingCartDisplay)
+    shoppingCartDisplay.setAttribute('id', 'shopping-cart-display')
 
-    const bookCover = document.createElement('div')
-    bookCover.setAttribute('id', 'book-cover')
-    shoppingCartCover.appendChild(bookCover)
+    cartArray.forEach(book => {
+        const shoppingCartCover = document.createElement('div')
+        shoppingCartCover.setAttribute('id','shoppingcart-cover');
+        shoppingCartDisplay.appendChild(shoppingCartCover)
+    
+        const bookCover = document.createElement('div')
+        bookCover.setAttribute('id', 'book-cover')
+        shoppingCartCover.appendChild(bookCover)
+    
+        const bookCoverContent = document.createElement('img')
+        bookCoverContent.setAttribute('id', 'book-cover-content')
+        bookCoverContent.setAttribute('src', `${book.cover}`)
+        bookCoverContent.setAttribute('alt', `${book.title}`)
+        bookCover.appendChild(bookCoverContent)
+    
+        const bookInfo = document.createElement( "div" )
+        bookInfo.setAttribute('id', 'book-info')
+        shoppingCartCover.appendChild(bookInfo)
+    
+        const bookTitle = document.createElement('h2')
+        bookTitle.textContent= book.title; 
+    
+        const bookPrice  = document.createElement('h1')
+        bookPrice.textContent=`Total: ${book.price}`
+    
+        const additionalInfo = document.createElement('p')
+        additionalInfo.textContent = 'Envío sin costo!'
+    
+        bookInfo.appendChild(bookTitle)
+        bookInfo.appendChild(bookPrice)
+        bookInfo.appendChild(additionalInfo)
+    })
 
-    const bookCoverContent = document.createElement('img')
-    bookCoverContent.setAttribute('id', 'book-cover-content')
-    bookCoverContent.setAttribute('src', `${books[0].cover}`)
-    bookCoverContent.setAttribute('alt', `${books[0].title}`)
-    bookCover.appendChild(bookCoverContent)
 
-    const bookInfo = document.createElement( "div" )
-    bookInfo.setAttribute('id', 'book-info')
-    shoppingCartCover.appendChild(bookInfo)
-
-    const bookTitle = document.createElement('h2')
-    bookTitle.textContent= books[0].title; 
-
-    const bookPrice  = document.createElement('h1')
-    bookPrice.textContent=`Total: ${books[0].price}`
-
-    const additionalInfo = document.createElement('p')
-    additionalInfo.textContent = 'Envío sin costo!'
-
-    bookInfo.appendChild(bookTitle)
-    bookInfo.appendChild(bookPrice)
-    bookInfo.appendChild(additionalInfo)
 
     const operationBtnContainer = document.createElement("div");
     operationBtnContainer.setAttribute("id", "operation-btn-container");
