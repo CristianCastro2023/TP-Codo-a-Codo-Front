@@ -31,6 +31,11 @@ const navBar = (arr, name) => {
     shoppingCart.setAttribute('id', 'navbar-shoppingcart');
     shoppingCart.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
 
+    const logIn = document.createElement("div");
+    logIn.classList.add('navbar-button');
+    logIn.setAttribute('id', 'navbar-login');
+    logIn.innerHTML = '<span class="material-symbols-outlined">account_circle</span>';
+
     const searchBar = document.createElement('input');
     searchBar.setAttribute('id', 'navbar-input');
     searchBar.setAttribute('type', 'text');
@@ -44,6 +49,7 @@ const navBar = (arr, name) => {
     navbar.appendChild(title);
     navbar.appendChild(searchBar);
     navbar.appendChild(shoppingCart);
+    navbar.appendChild(logIn);
 
     const deployMenu = document.createElement('div');
     deployMenu.setAttribute('id', 'deploy-menu');
@@ -54,6 +60,11 @@ const navBar = (arr, name) => {
         deployMenu.classList.toggle('show');
         e.stopPropagation();
     });
+
+    deployMenu.addEventListener('mouseleave',()=>{
+        deployMenu.classList.remove('show');
+        
+    })
 
     document.addEventListener('click', () => {
         deployMenu.classList.remove('show');
@@ -98,7 +109,7 @@ const homeDisplay = () =>{
 
     const footer = document.createElement('div');
     footer.setAttribute("id", "footer");
-    footer.textContent ='placeholder para el footer'
+    footer.innerHTML ='trabajo práctico para Codo a Codo - 2024. Contáctenos <a href="mailto:address@gmail.com"><span class="material-symbols-outlined" id="email-icon">alternate_email</span></a>'
     
     homeContainer.appendChild(placeholder)
     homeContainer.appendChild(footer)
@@ -162,7 +173,7 @@ const categoriesDisplay = (category, books) => {
 
     const seeMoreButton = document.createElement('button');
     seeMoreButton.setAttribute("id", "seeMoreButton");
-    seeMoreButton.textContent="Ver más";
+    seeMoreButton.textContent="Ver más...";
     mainDiv.appendChild(seeMoreButton)
     seeMoreButton.addEventListener('click',()=>{
         console.log('Ver más!')
@@ -278,7 +289,10 @@ const shoppingCartDisplay = (books) => {
     buyButton.onclick =()=>{console.log('comprado')}
     cancelButton.onclick =()=>{console.log('cancelado')}
 
-    closeButton.onclick = () =>{homeDisplay()}
+    closeButton.onclick = () =>{
+        modalBackground.remove()
+        homeDisplay()
+    }
 
 }
 
