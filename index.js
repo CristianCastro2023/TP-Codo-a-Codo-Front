@@ -2,6 +2,8 @@ import { Book, displayBooks } from "./assets/lookUp.js";
 
 const books = displayBooks
 
+const favBooks = []
+
 const categories = ['ficción', 'historia', 'recetas', 'cómics'];
 let currentPageTitle = 'AUREA';
 
@@ -88,7 +90,7 @@ const navBar = (arr, name) => {
 
     wishlist.addEventListener('click', ()=>{
         displayDiv.innerHTML=''
-        wishlistDisplay(books)
+        wishlistDisplay(favBooks)
          
     })
 
@@ -140,6 +142,7 @@ const categoriesDisplay = (category, books) => {
     filteredBooks.forEach(book => {
         const bookContainer = document.createElement('div');
         bookContainer.classList.add('book-container');
+        bookContainer.setAttribute('id', `${book.title}`)
 
         const bookTitle = document.createElement('h2');
         bookTitle.textContent = book.title;
@@ -153,6 +156,15 @@ const categoriesDisplay = (category, books) => {
         const buyButton = document.createElement('button')
         buyButton.textContent = 'Comprar'
 
+        const favButton = document.createElement('button')
+        favButton.textContent = '❤️'
+
+        favButton.onclick= ()=> {
+            const title = bookContainer.id 
+            favBooks.push(title)
+            console.log(favBooks)
+        }
+
         const bookCover = document.createElement('img');
         bookCover.setAttribute('src', book.cover);
         bookCover.setAttribute('alt', book.title);
@@ -162,6 +174,7 @@ const categoriesDisplay = (category, books) => {
         bookContainer.appendChild(bookAuthor);
         bookContainer.appendChild(bookPrice);
         bookContainer.appendChild(buyButton);
+        bookContainer.appendChild(favButton);
         
 
         coverContainer.appendChild(bookContainer);
@@ -180,33 +193,30 @@ const categoriesDisplay = (category, books) => {
     })
 }
 
-const wishlistDisplay = (books) =>{
-    console.log(books)
+const wishlistDisplay = (favBooks) =>{
     const wishlistContainer=document.createElement('div');
     displayDiv.appendChild(wishlistContainer);
-    books.forEach(book=>{
+    favBooks.forEach(book=>{
         const removeButtonColumn = document.createElement('div')
         removeButtonColumn.classList.add('remove-button-column')
 
         const titleColumn = document.createElement('div')
         titleColumn.classList.add('title-column')
 
-        const authorColumn = document.createElement('div')
-        authorColumn.classList.add('author-column')
-
         const iconColumn = document.createElement('div')
         iconColumn.classList.add('icon-column')
 
+        const buttonColumn = document.createElement('div')
+        buttonColumn.classList.add('button-column') 
+
         const wishRow = document.createElement('div');
         wishRow.classList.add('wish-row')
+        wishRow.setAttribute('id', `${book.title}`)
 
         let title = document.createElement('h2')
-        title.textContent = book.title;
+        title.textContent = book;
         titleColumn.appendChild(title);
 
-        let author = document.createElement('h3')
-        author.textContent= book.author
-        authorColumn.appendChild(author);
 
         let icon = document.createElement('h3')
         icon.innerHTML= '<span class="material-symbols-outlined">favorite</span>'
@@ -214,13 +224,21 @@ const wishlistDisplay = (books) =>{
 
         const removeButton = document.createElement('button')
         removeButton.classList.add('remove-button')
-        removeButtonColumn.appendChild(removeButton)
+        buttonColumn.appendChild(removeButton)
         removeButton.textContent = 'remover'
+        removeButton.onclick = ()  => {
+            const currentRow = document.getElementById(book.title);
+                if (currentRow) {
+                    currentRow.remove();    
+                } else {
+                console.error('element not found');
+                        }    
+        }
         
+    
         wishRow.appendChild(titleColumn)
-        wishRow.appendChild(authorColumn)
         wishRow.appendChild(iconColumn)
-        wishRow.appendChild(removeButton) 
+        wishRow.appendChild(buttonColumn) 
         wishlistContainer.appendChild(wishRow)
     }) 
 }

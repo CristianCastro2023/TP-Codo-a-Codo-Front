@@ -10,6 +10,7 @@
 body{
     margin: 0;
     padding: 0;
+    background-color: var(--light-background-color);
 }
 
 #navbar{
@@ -165,10 +166,21 @@ cursor: pointer;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    background-color: var(--light-background-color);
 }
+
+.wish-row:hover{
+    background-color: var(--main-color-dark);
+}
+
+.wish-row > *:hover{
+    color: var(--light-background-color);
+}
+
 .title-column{
     flex: 1;
     margin-left: 1vw;
+    color: black;
 }
 .author-column{
     display: flex;
@@ -185,14 +197,28 @@ cursor: pointer;
     justify-content: center;
     align-items: center;
 }
-.remove-button-column{
-    flex: 1;
-    justify-content: flex-end;
+
+.button-column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
 }
+
 .remove-button{
     height: 40px;
     width: auto;
+    font-weight: bolder;
+    border: none;
+    background-color: var(--main-accent-color);
+    color: var(--main-color-dark);
+    border-radius: 8px;
 }
+
+.remove-button:hover{
+    cursor: pointer;
+}
+
 
 .material-symbols-outlined{
   font-variation-settings:
