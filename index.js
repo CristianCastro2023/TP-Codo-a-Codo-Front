@@ -316,7 +316,10 @@ const shoppingCartDisplay = (cartArray) => {
     const totalText = document.createElement('h2')
     totalText.textContent = `Tu total es $${priceAcc}`
 
-    totalTextContainer.appendChild(totalText)
+    if(cartArray.length >= 1){
+        totalTextContainer.appendChild(totalText)
+    }
+
 
     shoppingCartContainer.appendChild(totalTextContainer)
 
