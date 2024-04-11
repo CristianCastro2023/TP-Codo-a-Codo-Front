@@ -152,7 +152,7 @@ const categoriesDisplay = (category, books) => {
         bookAuthor.textContent = `Autor: ${book.author}`;
 
         const bookPrice = document.createElement('p');
-        bookPrice.textContent = `Precio: ${book.price}`;
+        bookPrice.textContent = `Precio: $${book.price.toString()}`;
 
         const buyButton = document.createElement('button')
         buyButton.textContent = 'Comprar'
@@ -252,14 +252,20 @@ const shoppingCartDisplay = (cartArray) => {
     modalBackground.setAttribute("id", "modal-background");
     body.appendChild(modalBackground);
 
+    const emptyMsg = document.createElement('h1')
+    emptyMsg.textContent = 'Aún no hay nada por aquí...'
+
     const shoppingCartContainer = document.createElement( "div" );
     shoppingCartContainer.setAttribute("id","shoppingcart-container")
     modalBackground.appendChild(shoppingCartContainer)
+    
     cartArray.length > 1 ? shoppingCartContainer.classList.add('shoppingcart-container-large') : ''
 
     const closeButtonContainer = document.createElement("div");
     closeButtonContainer.setAttribute('id', 'close-btn-container')
     shoppingCartContainer.appendChild(closeButtonContainer)
+
+    cartArray.length === 0 ? shoppingCartContainer.appendChild(emptyMsg) : ''
 
     const closeButton = document.createElement("button");
     closeButton.setAttribute("id", "close-button");
@@ -270,7 +276,9 @@ const shoppingCartDisplay = (cartArray) => {
     shoppingCartContainer.appendChild(shoppingCartDisplay)
     shoppingCartDisplay.setAttribute('id', 'shopping-cart-display')
 
+    let priceAcc = 0
     cartArray.forEach(book => {
+        
         const shoppingCartCover = document.createElement('div')
         shoppingCartCover.setAttribute('id','shoppingcart-cover');
         shoppingCartDisplay.appendChild(shoppingCartCover)
@@ -292,18 +300,25 @@ const shoppingCartDisplay = (cartArray) => {
         const bookTitle = document.createElement('h2')
         bookTitle.textContent= book.title; 
     
-        const bookPrice  = document.createElement('h1')
-        bookPrice.textContent=`Total: ${book.price}`
-    
         const additionalInfo = document.createElement('p')
         additionalInfo.textContent = 'Envío sin costo!'
     
         bookInfo.appendChild(bookTitle)
-        bookInfo.appendChild(bookPrice)
         bookInfo.appendChild(additionalInfo)
+
+        priceAcc += book.price
+        console.log(priceAcc);
     })
 
+    const totalTextContainer = document.createElement('div')
+    totalTextContainer.setAttribute("id", "total-text-container")
 
+    const totalText = document.createElement('h2')
+    totalText.textContent = `Tu total es $${priceAcc}`
+
+    totalTextContainer.appendChild(totalText)
+
+    shoppingCartContainer.appendChild(totalTextContainer)
 
     const operationBtnContainer = document.createElement("div");
     operationBtnContainer.setAttribute("id", "operation-btn-container");
@@ -316,14 +331,23 @@ const shoppingCartDisplay = (cartArray) => {
 
     operationBtnContainer.appendChild(buyButton)
     operationBtnContainer.appendChild(cancelButton)
+    let boughtArr = []
 
-    buyButton.onclick =()=>{console.log('comprado')}
+    buyButton.onclick =()=>{
+        boughtArr.push(cartArray)
+        cartArray.splice(0, cartArray.length);
+        console.log(boughtArr);
+        console.log(cartArray)
+        homeDisplay()
+    }
     cancelButton.onclick =()=>{console.log('cancelado')}
 
     closeButton.onclick = () =>{
         modalBackground.remove()
         homeDisplay()
     }
+
+    
 
 }
 

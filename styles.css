@@ -27,6 +27,7 @@ body{
     color: var(--light-background-color);
     font-size: larger;
     z-index: 3;
+    
 }
 
 .navbar-button{
