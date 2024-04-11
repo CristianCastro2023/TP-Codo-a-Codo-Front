@@ -301,7 +301,7 @@ const shoppingCartDisplay = (cartArray) => {
         bookTitle.textContent= book.title; 
     
         const additionalInfo = document.createElement('p')
-        additionalInfo.textContent = 'Envío sin costo!'
+        additionalInfo.textContent = `Precio por unidad: $${book.price}`
     
         bookInfo.appendChild(bookTitle)
         bookInfo.appendChild(additionalInfo)
