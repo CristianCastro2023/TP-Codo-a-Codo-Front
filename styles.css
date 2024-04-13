@@ -283,7 +283,7 @@ cursor: pointer;
     align-items: center;
 }
 
-#shoppingcart-container{
+#shoppingcart-container {
     height: 80vh;
     width: 65vw;
     background-color: antiquewhite;
@@ -291,6 +291,7 @@ cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 5; /* Ajuste del z-index para que el carrito esté siempre encima */
 }
 
 .shoppingcart-container-large > #shopping-cart-display{
@@ -351,7 +352,14 @@ cursor: pointer;
 #footer{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end;#footer {
+        position: fixed;
+        bottom: 0;
+        height: 5vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 4; /* Z-index original del footer */
+    }
 }
 }
 

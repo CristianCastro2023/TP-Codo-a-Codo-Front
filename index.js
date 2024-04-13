@@ -19,6 +19,7 @@ const displayDiv = document.querySelector('#display-div');
 
 const initialize = () => {
   navBar(CATEGORIES, PAGE_TITLE);
+  shoppingCartDisplay(); // Llamar al carrito antes de mostrar el contenido principal
   homeDisplay();
 }
 
