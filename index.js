@@ -147,12 +147,12 @@ const homeDisplay = () => {
   placeholder.setAttribute('id', 'placeholder')
   placeholder.textContent = 'placeholder para info del home'
 
-  const footer = document.createElement('div');
-  footer.setAttribute("id", "footer");
-  footer.innerHTML = 'trabajo práctico para Codo a Codo - 2024. Contáctenos <a href="mailto:address@gmail.com"><span class="material-symbols-outlined" id="email-icon">alternate_email</span></a>'
+  //const footer = document.createElement('div');
+  //footer.setAttribute("id", "footer");
+  //footer.innerHTML = 'trabajo práctico para Codo a Codo - 2024. Contáctenos <a href="mailto:address@gmail.com"><span class="material-symbols-outlined" id="email-icon">alternate_email</span></a>'
 
   homeContainer.appendChild(placeholder)
-  homeContainer.appendChild(footer)
+  //homeContainer.appendChild(footer)
 } //this is the main screen when the app loads
 
 const categoriesDisplay = (category, books) => {
