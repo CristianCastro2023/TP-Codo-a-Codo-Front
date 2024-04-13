@@ -35,6 +35,11 @@ const navBar = (arr, name) => {
   title.textContent = name;
   navbar.appendChild(title);
 
+  title.onclick = () => {
+    displayDiv.innerHTML = ''
+    homeDisplay()
+  }
+
   const toggleMenuButton = document.createElement("button");
 
   const searchBar = document.createElement('input');
@@ -135,7 +140,22 @@ const homeDisplay = () => {
 
   const placeholder = document.createElement('div')
   placeholder.setAttribute('id', 'placeholder')
-  placeholder.textContent = 'placeholder para info del home'
+  
+
+  const slogan = document.createElement('div')
+  slogan.setAttribute('id', 'slogan')
+  placeholder.appendChild(slogan)
+  slogan.textContent = 'Animate a descubrir a los mejores escritores y obras del mundo'
+  
+  
+  const description = document.createElement('div')
+  description.setAttribute('id','description')
+  placeholder.appendChild(description)
+  description.textContent = 'AUREA es el lugar para encontrar y descubrir todo lo que necesitas, acá.'
+
+  const banner = document.createElement('div')
+  banner.setAttribute('id', 'banner')
+  placeholder.appendChild(banner)
 
   const footer = document.createElement('div');
   footer.setAttribute("id", "footer");

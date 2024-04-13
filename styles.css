@@ -376,11 +376,32 @@ cursor: pointer;
     border: none;
 }
 
-#display-div{
-    height: 100vh;
+#placeholder{
+    width: 100%;
+    height: 80vh;
+    margin-top: 20%;
 }
 
+#slogan{
+    font-weight: bolder;
+    font-size: 48px;
+    color: var(--main-color-light);
+}
+
+#description{
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--main-color-dark);
+}
+
+#banner{
+    background-color: green;
+    width: 100%;
+    height: 40%;
+}
 /*NAVBAR COLLIPSIBLE FUNCTION*/
+
+
   .hidden {
     height: 6vh; /* Set the height of the hidden navbar */
   }
@@ -570,8 +591,8 @@ padding-top: 1%;
  /*INVENTORY SCREEN*/
 
  #cat-spacer{
-    width: 100%;
-    height: 8%;
+    width: 100%;    
+    height: 15% !important; 
  }
 
  #cat-back-button-container{
@@ -694,7 +715,7 @@ padding-top: 1%;
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 4;
+    z-index: 6;
     display: flex;
     justify-content: center;
     align-items: center;
