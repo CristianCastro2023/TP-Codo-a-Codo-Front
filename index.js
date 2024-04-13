@@ -1,5 +1,8 @@
 import { displayBooks } from "./assets/lookUp.js";
 
+
+
+
 const CATEGORIES = ['ficción', 'historia', 'recetas', 'cómics'];//add categories here, they'll be dinamically added to the dropdown menu of the navbar
 
 let PAGE_TITLE = 'AUREA';
@@ -25,16 +28,43 @@ const navBar = (arr, name) => {
   const navbar = document.createElement("nav");
   navbarContainer.appendChild(navbar);
   navbar.setAttribute("id", "navbar");
+  navbar.classList.add('hidden')
+
+  const title = document.createElement('div');
+  title.setAttribute('id', 'page-title');
+  title.textContent = name;
+  navbar.appendChild(title);
+
+  
+  const toggleMenuButton = document.createElement("button");
+
+  const searchBar = document.createElement('input');
+  searchBar.setAttribute('id', 'navbar-input');
+  searchBar.setAttribute('type', 'text');
+  searchBar.setAttribute('placeholder', 'buscar libros...')
+
+  title.appendChild(searchBar);
+  title.appendChild(toggleMenuButton);
+  
+
+  toggleMenuButton.setAttribute('id', 'toggle-menu-button')
+  toggleMenuButton.innerHTML = '<span class="material-symbols-outlined">menu</span>'
+
+  toggleMenuButton.onclick=()=>{
+    navbar.classList.toggle('show')
+  }
+
 
   const categoriesBtn = document.createElement("div");
   categoriesBtn.classList.add('navbar-button');
   categoriesBtn.setAttribute('id', 'navbar-categories');
   categoriesBtn.textContent = 'Categorías';
+  categoriesBtn.classList.add('closed')
 
   const wishlist = document.createElement("div");
   wishlist.classList.add('navbar-button');
   wishlist.setAttribute('id', 'navbar-wishlist');
-  wishlist.innerHTML = 'Deseos ' + '<span class="material-symbols-outlined">favorite</span>';
+  wishlist.innerHTML = '<span>Deseos</span>' + '<span class="material-symbols-outlined">favorite</span>';
 
   const shoppingCart = document.createElement("div");
   shoppingCart.classList.add('navbar-button');
@@ -46,28 +76,24 @@ const navBar = (arr, name) => {
   logIn.setAttribute('id', 'navbar-login');
   logIn.innerHTML = '<span class="material-symbols-outlined">account_circle</span>';
 
-  const searchBar = document.createElement('input');
-  searchBar.setAttribute('id', 'navbar-input');
-  searchBar.setAttribute('type', 'text');
+  
 
-  const title = document.createElement('div');
-  title.setAttribute('id', 'page-title');
-  title.textContent = name;
-
+  
   navbar.appendChild(categoriesBtn);
   navbar.appendChild(wishlist);
-  navbar.appendChild(title);
-  navbar.appendChild(searchBar);
+  
+ 
   navbar.appendChild(shoppingCart);
   navbar.appendChild(logIn);
 
   const deployMenu = document.createElement('div');
   deployMenu.setAttribute('id', 'deploy-menu');
-  deployMenu.className = 'hidden';
+  deployMenu.className = 'hidden-menu';
   categoriesBtn.appendChild(deployMenu);
 
   categoriesBtn.addEventListener('click', (e) => {
     deployMenu.classList.toggle('show');
+    deployMenu.classList.toggle('open');
     e.stopPropagation();
   });
 
@@ -86,6 +112,7 @@ const navBar = (arr, name) => {
     deployMenu.appendChild(menuLink);
     menuLink.addEventListener('click', () => {
       handleMenuLinkClick(element);
+      navbar.classList.remove('show')
     });
   });
 
@@ -99,12 +126,13 @@ const navBar = (arr, name) => {
   wishlist.addEventListener('click', () => {
     displayDiv.innerHTML = ''
     wishlistDisplay(favBooks)
-
+    navbar.classList.remove('show')
   })
 
   shoppingCart.addEventListener('click', () => {
     displayDiv.innerHTML = ''
     shoppingCartDisplay(cartArray)
+    navbar.classList.remove('show')
   })
 }
 
@@ -154,8 +182,20 @@ const categoriesDisplay = (category, books) => {
       bookContainer.classList.add('book-container');
       bookContainer.setAttribute('id', `${book.title}`)
 
+      const bookContainerInfoContainer = document.createElement('div')
+      bookContainerInfoContainer.classList.add('book-container-info-container')
+
+      
+
       const bookTitle = document.createElement('h2');
-      bookTitle.textContent = book.title;
+
+      if(book.title.length > 15){
+        bookTitle.textContent = book.title.slice(0, 10) + '...';
+      } else (
+        bookTitle.textContent = book.title
+      )
+    //   
+
 
       const bookAuthor = document.createElement('p');
       bookAuthor.textContent = `Autor: ${book.author}`;
@@ -183,21 +223,27 @@ const categoriesDisplay = (category, books) => {
       bookCover.setAttribute('alt', book.title);
       bookCover.classList.add('book-cover');
       bookContainer.appendChild(bookCover);
-      bookContainer.appendChild(bookTitle);
-      bookContainer.appendChild(bookAuthor);
-      bookContainer.appendChild(bookPrice);
-      bookContainer.appendChild(buyButton);
-      bookContainer.appendChild(favButton);
+      bookContainer.appendChild(bookContainerInfoContainer)
+      bookContainerInfoContainer.appendChild(bookTitle);
+      bookContainerInfoContainer.appendChild(bookAuthor);
+      bookContainerInfoContainer.appendChild(bookPrice);
+      bookContainerInfoContainer.appendChild(buyButton);
+      bookContainerInfoContainer.appendChild(favButton);
 
 
       coverContainer.appendChild(bookContainer);
 
     });
 
+    const seeMoreButtonContainer = document.createElement('div')
+    seeMoreButtonContainer.classList.add('see-more-container')
+
+    mainDiv.appendChild(seeMoreButtonContainer)
+
     const seeMoreButton = document.createElement('button');
     seeMoreButton.setAttribute("id", "seeMoreButton");
     seeMoreButton.textContent = "Ver más...";
-    mainDiv.appendChild(seeMoreButton)
+    seeMoreButtonContainer.appendChild(seeMoreButton)
     seeMoreButton.addEventListener('click', () => {
       console.log('Ver más!')
     })
@@ -213,6 +259,7 @@ const categoriesDisplay = (category, books) => {
 const wishlistDisplay = () => {
   const fetchFavs = (arr) => {
     const wishlistContainer = document.createElement('div');
+    wishlistContainer.setAttribute('id', 'wishlist-container');
     displayDiv.appendChild(wishlistContainer);
     arr.forEach(book => {
       const removeButtonColumn = document.createElement('div')
@@ -301,21 +348,21 @@ const shoppingCartDisplay = () => {
     cartArray.forEach(book => {
 
       const shoppingCartCover = document.createElement('div')
-      shoppingCartCover.setAttribute('id', 'shoppingcart-cover');
+      shoppingCartCover.setAttribute('class', 'shoppingcart-cover');
       shoppingCartDisplay.appendChild(shoppingCartCover)
 
       const bookCover = document.createElement('div')
-      bookCover.setAttribute('id', 'book-cover')
+      bookCover.setAttribute('class', 'book-cover')
       shoppingCartCover.appendChild(bookCover)
 
       const bookCoverContent = document.createElement('img')
-      bookCoverContent.setAttribute('id', 'book-cover-content')
+      bookCoverContent.setAttribute('class', 'book-cover-content')
       bookCoverContent.setAttribute('src', `${book.cover}`)
       bookCoverContent.setAttribute('alt', `${book.title}`)
       bookCover.appendChild(bookCoverContent)
 
       const bookInfo = document.createElement("div")
-      bookInfo.setAttribute('id', 'book-info')
+      bookInfo.setAttribute('class', 'book-info')
       shoppingCartCover.appendChild(bookInfo)
 
       const bookTitle = document.createElement('h2')

@@ -12,6 +12,7 @@ body{
     padding: 0;
     background-color: var(--light-background-color);
 }
+@media only screen and (min-width: 768px){
 
 #navbar{
     position: absolute;
@@ -30,6 +31,13 @@ body{
     
 }
 
+#toggle-menu-button{
+    display: none;
+  }
+
+  .hidden-menu{
+    display: none;
+  }
 .navbar-button{
     height: auto;
     width: 120px;
@@ -332,3 +340,328 @@ cursor: pointer;
     align-items: center;
     justify-content: flex-end;
 }
+}
+
+/*SMALL SCREENS*/
+
+
+
+  @media only screen and (max-width: 767px){
+  /*HERE STARTS THE NAVBAR*/
+
+  #navbar {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    background-color: var(--main-color-dark);
+    color: var(--light-background-color);
+    z-index: 3;
+    transition: height 0.3s ease; /* Add transition for height change */
+  } 
+  #navbar-input{
+    border-radius: 8px;
+    border: none;
+}
+
+/*NAVBAR COLLIPSIBLE FUNCTION*/
+  .hidden {
+    height: 6vh; /* Set the height of the hidden navbar */
+  }
+  .hidden > #navbar-categories,
+  .hidden > #navbar-wishlist,
+  .hidden > #navbar-shoppingcart,
+  .hidden > #navbar-login,
+  .hidden > #navbar-input {
+    display: none; /* Or display: block; depending on your layout */
+  }
+  .show > #navbar-categories,
+  .show > #navbar-wishlist,
+  .show > #navbar-shoppingcart,
+  .show > #navbar-login,
+  .show > #navbar-input{
+    display: flex; /* Or display: block; depending on your layout */
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #page-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 32px;
+    font-weight: bolder;
+    color: var(--light-background-color);
+  }
+  .navbar-button{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+}
+#navbar-wishlist{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;    
+}
+  #toggle-menu-button{
+    height: 40px;
+    width: 40px;
+    color: var(--main-accent-color);
+    border: none;
+    background: none;
+  }
+  .show {
+    height: auto; /* Set the height of the navbar to auto when it's in the show state */
+  }
+  .hidden-menu{
+    display: none;
+  }
+  .open{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar-button:hover {
+    cursor: pointer;
+    background-color: var(--main-accent-color);
+    color: var(--main-color-dark);
+}
+/*CATEGORIES MENU*/
+#deploy-menu{
+font-weight: bolder;
+width: 100%;
+height: auto;
+overflow-y: auto;
+padding-top: 1%;
+}
+#deploy-menu>a{
+    width: 100%;
+}
+#deploy-menu>a:hover{
+    background-color: var(--main-color-dark);
+    color: var(--light-background-color);
+}   
+#footer{
+    position: fixed;
+    bottom: 0;  
+    height: 7vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-background-color);
+    height: 100vh;
+    margin-top: 0;
+    width: 100%;
+    overflow: hidden;
+}
+/*CATEGORIES PICKS*/
+.see-more-container{
+    height: 40px;
+}
+#seeMoreButton{
+    margin-top: 40vh;
+    margin-left: 80vw;
+ }
+ 
+ #title{
+     color: var(--main-color-light);
+     font-size: 40px;
+     margin-top: 5vh;
+     margin-bottom: -40px;
+ }
+ #cover-container{
+    margin-top: 10%;
+    overflow-y: auto;
+     width: 100%;
+     height: 800px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+ .book-container{
+     margin-top: 8%;    
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     height: 400px;
+     background-color: var(--main-accent-color);
+     box-shadow: 10px 22px 17px 7px rgba(0,0,0,0.4);
+ }
+ .book-container-info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ .book-cover{
+     height: 400px;
+     width: 280px;
+     margin-bottom: 0;
+     margin-left: 0; 
+ }
+ 
+ .book-container > .book-container-info-container > button {
+     background-color: var(--main-accent-color);
+     border: none;
+     font-weight: bolder;
+     font-size: 20px;
+     color: var(--main-color-dark);
+     width: 100%;
+     height: 40px;
+     background-color: var(--secondary-accent-color);
+     margin-bottom: 0;
+ }
+ 
+ .book-container > .book-container-info-container > button:hover {
+     cursor: pointer;
+ }
+ 
+ #seeMoreButton{
+ background-color: var(--light-background-color);
+ font-weight: bolder;
+ border: none;
+ color: var(--main-color-dark);
+ font-size: 20px;
+ height: 40px;
+ }
+ 
+ #seeMoreButton:hover{
+ cursor: pointer;
+ }
+
+ /*WISHLIST*/
+ 
+ #wishlist-container{
+    margin-top: 20%;
+ }
+ .wish-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: var(--light-background-color);
+    border: 1px none 1px solid black;
+}
+
+.wish-row:hover{
+    background-color: var(--main-color-dark);
+}
+
+.wish-row > *:hover{
+    color: var(--light-background-color);
+}
+
+.title-column{
+    flex: 1;
+    margin-left: 1vw;
+    color: black;
+}
+.author-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.icon-column{
+    color: red;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.remove-button{
+    height: 40px;
+    width: auto;
+    font-weight: bolder;
+    border: none;
+    background-color: var(--main-accent-color);
+    color: var(--main-color-dark);
+    border-radius: 8px;
+}
+
+.remove-button:hover{
+    cursor: pointer;
+}
+
+/*SHOPPING CART*/
+
+#modal-background{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#shoppingcart-container{
+    height: 80vh;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shoppingcart-container-large > #shopping-cart-display{
+    overflow-y: scroll ;
+    max-height: 55vh;
+}
+
+#close-button{
+    margin: 20px;
+    height: 30px;
+    width: 30px;
+    
+}
+
+#close-btn-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    width: inherit;
+}
+
+.shoppingcart-cover{
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+    width: 100%;
+    margin-bottom: 2%;
+}
+.book-cover-content{
+    height: 300px;
+}
+.book-info{
+    margin-left: 4%;
+}
+  }
