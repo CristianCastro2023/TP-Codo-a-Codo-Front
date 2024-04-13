@@ -810,4 +810,13 @@ padding-top: 1%;
     }
 }
 
+.contact-link {
+    color: white; /* Cambia el color del texto */
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+    /* Agrega otros estilos según tus preferencias */
+}
 
+.contact-link:hover {
+    text-decoration: underline; /* Agrega subrayado al pasar el mouse */
+}
