@@ -1,11 +1,11 @@
 class Book{
-    constructor(title, author, cover, price, category, amount) {
+    constructor(title, author, cover, price, category, quantity) {
       this.title = title;
       this.author = author;
       this.cover = cover;
       this.price = price;
       this.category = category;
-      this.amount = amount;
+      this.quantity = quantity;
     }  
   }
 

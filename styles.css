@@ -31,6 +31,16 @@ body{
     
 }
 
+#page-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 180px;
+    font-size: 32px;
+    font-weight: bolder;
+    color: var(--light-background-color);
+}
+
 #toggle-menu-button{
     display: none;
   }
@@ -98,6 +108,8 @@ body{
     overflow: hidden;
 }
 
+/*CATEGORIES PICKS*/
+
 #seeMoreButton{
    margin-top: 40vh;
    margin-left: 80vw;
@@ -128,6 +140,7 @@ body{
     height: 400px;
     background-color: var(--main-accent-color);
     padding-bottom: 5px;
+    box-shadow: 10px 22px 17px 7px rgba(0,0,0,0.4);
 }
 .book-cover{
     margin-top: 25px;
@@ -142,7 +155,7 @@ body{
     margin: auto;
 }
 
-.book-container > button {
+.book-container > .book-container-info-container > button {
     background-color: var(--main-accent-color);
     border: none;
     font-weight: bolder;
@@ -363,6 +376,10 @@ cursor: pointer;
     border: none;
 }
 
+#display-div{
+    height: 100vh;
+}
+
 /*NAVBAR COLLIPSIBLE FUNCTION*/
   .hidden {
     height: 6vh; /* Set the height of the hidden navbar */
@@ -472,11 +489,14 @@ padding-top: 1%;
 }
 /*CATEGORIES PICKS*/
 .see-more-container{
-    height: 40px;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 #seeMoreButton{
-    margin-top: 40vh;
-    margin-left: 80vw;
+    position: absolute;
  }
  
  #title{
@@ -545,6 +565,63 @@ padding-top: 1%;
  
  #seeMoreButton:hover{
  cursor: pointer;
+ }
+
+ /*INVENTORY SCREEN*/
+
+ #cat-spacer{
+    width: 100%;
+    height: 8%;
+ }
+
+ #cat-back-button-container{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+ }
+
+ #cat-back-button{
+    font-weight: bolder;
+    color: var(--main-color-dark);
+    border: none;
+    background-color: var(--light-background-color);
+    font-size: large;
+ }
+ .cat-inventory-container{
+    height: 80vh;
+    width: 100%;
+ }
+
+ .inventory-item-row{
+    width: 100%;
+ }
+ 
+ .inventory-item-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+ }
+
+ .inventory-item-image{
+    height: 140px;
+    width: 90px;
+ }
+
+ .inventory-item-title-author-container{
+    margin-left: 5px;
+    font-size: small;
+    width: 40%;
+ }
+
+ .inventory-item-quantity-price-container{
+    font-size: 12px;
  }
 
  /*WISHLIST*/

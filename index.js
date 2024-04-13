@@ -35,7 +35,6 @@ const navBar = (arr, name) => {
   title.textContent = name;
   navbar.appendChild(title);
 
-  
   const toggleMenuButton = document.createElement("button");
 
   const searchBar = document.createElement('input');
@@ -76,13 +75,8 @@ const navBar = (arr, name) => {
   logIn.setAttribute('id', 'navbar-login');
   logIn.innerHTML = '<span class="material-symbols-outlined">account_circle</span>';
 
-  
-
-  
   navbar.appendChild(categoriesBtn);
   navbar.appendChild(wishlist);
-  
- 
   navbar.appendChild(shoppingCart);
   navbar.appendChild(logIn);
 
@@ -99,7 +93,6 @@ const navBar = (arr, name) => {
 
   deployMenu.addEventListener('mouseleave', () => {
     deployMenu.classList.remove('show');
-
   })
 
   document.addEventListener('click', () => {
@@ -120,7 +113,6 @@ const navBar = (arr, name) => {
     displayDiv.innerHTML = ''
     PAGE_TITLE = str;
     categoriesDisplay(str, books);
-
   };
 
   wishlist.addEventListener('click', () => {
@@ -245,7 +237,8 @@ const categoriesDisplay = (category, books) => {
     seeMoreButton.textContent = "Ver más...";
     seeMoreButtonContainer.appendChild(seeMoreButton)
     seeMoreButton.addEventListener('click', () => {
-      console.log('Ver más!')
+      mainDiv.remove()
+      seeFullInventoryByCat(category, books)
     })
 
   }
@@ -254,7 +247,95 @@ const categoriesDisplay = (category, books) => {
   } catch (e) {
     console.error('there was an issue fetching books')
   }
-}//creates a screen when a categoy is selected from the navbar dropdown
+}//creates a screen when a category is selected from the navbar dropdown
+
+const seeFullInventoryByCat = (category, books) =>{
+  const fetchCatInventory = (category, books) => {
+    //clear out old content before adding new info
+
+    const spacer = document.createElement('div')
+    const catInventoryContainer = document.createElement('div')
+    spacer.setAttribute('id', 'cat-spacer')
+    const backButtonContainer = document.createElement('div')
+    backButtonContainer.setAttribute('id', 'cat-back-button-container')
+
+    const backButton =  document.createElement('button')
+    backButton.setAttribute('id', 'cat-back-button')
+    backButton.innerHTML = 'volver'
+
+    backButton.onclick = () =>{
+      displayDiv.innerHTML = ''
+      homeDisplay();
+    } 
+
+    backButtonContainer.appendChild(backButton)
+
+
+
+    catInventoryContainer.setAttribute('id','cat-inventory-container')
+    displayDiv.appendChild(spacer)
+    displayDiv.appendChild(catInventoryContainer)
+    displayDiv.appendChild(backButtonContainer)
+
+    const filteredBooks = books.filter(book => book.category === category);
+    filteredBooks.forEach(book=>{
+      console.log(book)
+      const inventoryItemRow = document.createElement('div')
+      inventoryItemRow.classList.add('inventory-item-row')
+
+      const inventoryItemContainer = document.createElement('div')
+      inventoryItemContainer.classList.add('inventory-item-container')
+
+      const inventoryItemImageContainer = document.createElement('div')
+      inventoryItemImageContainer.classList.add('inventory-item-image-container')
+
+      const inventoryItemImage = document.createElement('img')
+      inventoryItemImage.setAttribute('src', `${book.cover}`)
+      inventoryItemImage.setAttribute('alt', `${book.title}`)
+      inventoryItemImage.setAttribute('class', 'inventory-item-image')
+      
+
+      inventoryItemImageContainer.appendChild(inventoryItemImage)
+
+      const inventoryItemTitleAuthorContainer = document.createElement('div')
+      inventoryItemTitleAuthorContainer.classList.add('inventory-item-title-author-container')
+
+      const inventoryItemTitle = document.createElement('h3')
+      inventoryItemTitle.textContent= book.title
+
+      const inventoryItemAuthor = document.createElement('h3')
+      inventoryItemAuthor.textContent= book.author
+
+      inventoryItemTitleAuthorContainer.appendChild(inventoryItemTitle)
+      inventoryItemTitleAuthorContainer.appendChild(inventoryItemAuthor)
+
+      const inventoryItemQuantityPriceContainer = document.createElement('div')
+      inventoryItemQuantityPriceContainer.classList.add('inventory-item-quantity-price-container')
+
+      const inventoryItemQuantity = document.createElement('h3')
+      inventoryItemQuantity.textContent= 'Unidades en stock: ' + book.quantity
+
+      const inventoryItemPrice = document.createElement('h3')
+      inventoryItemPrice.textContent = 'Precio unitario: ' + '$'+book.price
+
+      inventoryItemQuantityPriceContainer.appendChild(inventoryItemQuantity)
+      inventoryItemQuantityPriceContainer.appendChild(inventoryItemPrice)
+
+      inventoryItemContainer.appendChild(inventoryItemImageContainer)
+      inventoryItemContainer.appendChild(inventoryItemTitleAuthorContainer)
+      inventoryItemContainer.appendChild(inventoryItemQuantityPriceContainer)
+
+      inventoryItemRow.appendChild(inventoryItemContainer)
+
+      catInventoryContainer.appendChild(inventoryItemRow)
+    })
+  }
+  try{
+    fetchCatInventory(category,books)
+  } catch(e){
+    console.log(e)
+  }
+}
 
 const wishlistDisplay = () => {
   const fetchFavs = (arr) => {
