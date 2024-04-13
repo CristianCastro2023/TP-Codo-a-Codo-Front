@@ -22,6 +22,9 @@ const initialize = () => {
   homeDisplay();
 }
 
+ 
+
+
 const navBar = (arr, name) => {
   const menuCategories = arr;
 
@@ -79,6 +82,13 @@ const navBar = (arr, name) => {
   navbar.appendChild(wishlist);
   navbar.appendChild(shoppingCart);
   navbar.appendChild(logIn);
+
+  // Agrega el evento de clic para redirigir al usuario a la página de inicio de sesión
+ logIn.addEventListener('click', () => {
+  // Redirigir al usuario a la página de inicio de sesión
+  window.location.href = 'login.html';
+});
+
 
   const deployMenu = document.createElement('div');
   deployMenu.setAttribute('id', 'deploy-menu');
