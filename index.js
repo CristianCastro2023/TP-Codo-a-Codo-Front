@@ -163,6 +163,8 @@ const homeDisplay = () => {
 
   homeContainer.appendChild(placeholder)
   homeContainer.appendChild(footer)
+
+  
 } //this is the main screen when the app loads
 
 const categoriesDisplay = (category, books) => {
@@ -193,10 +195,16 @@ const categoriesDisplay = (category, books) => {
       const bookContainer = document.createElement('div');
       bookContainer.classList.add('book-container');
       bookContainer.setAttribute('id', `${book.title}`)
+      bookContainer.style.backgroundImage = `url(${book.cover})`
+      bookContainer.style.backgroundSize = `cover`
 
       const bookContainerInfoContainer = document.createElement('div')
       bookContainerInfoContainer.classList.add('book-container-info-container')
-
+      
+      const bookContainerInfoContainerButtonsContainer = document.createElement('div')
+      bookContainerInfoContainerButtonsContainer.classList.add('book-container-info-buttons-container')
+      const bookContainerInfoContainerTextContainer = document.createElement('div')
+      bookContainerInfoContainerTextContainer.classList.add('book-container-info-text-container')
       
 
       const bookTitle = document.createElement('h2');
@@ -236,11 +244,15 @@ const categoriesDisplay = (category, books) => {
       bookCover.classList.add('book-cover');
       bookContainer.appendChild(bookCover);
       bookContainer.appendChild(bookContainerInfoContainer)
-      bookContainerInfoContainer.appendChild(bookTitle);
-      bookContainerInfoContainer.appendChild(bookAuthor);
-      bookContainerInfoContainer.appendChild(bookPrice);
-      bookContainerInfoContainer.appendChild(buyButton);
-      bookContainerInfoContainer.appendChild(favButton);
+
+      bookContainerInfoContainer.appendChild(bookContainerInfoContainerTextContainer)
+      bookContainerInfoContainer.appendChild(bookContainerInfoContainerButtonsContainer)
+
+      bookContainerInfoContainerTextContainer.appendChild(bookTitle);
+      bookContainerInfoContainerTextContainer.appendChild(bookAuthor);
+      bookContainerInfoContainerTextContainer.appendChild(bookPrice);
+      bookContainerInfoContainerButtonsContainer.appendChild(buyButton);
+      bookContainerInfoContainerButtonsContainer.appendChild(favButton);
 
 
       coverContainer.appendChild(bookContainer);
@@ -273,9 +285,9 @@ const seeFullInventoryByCat = (category, books) =>{
   const fetchCatInventory = (category, books) => {
     //clear out old content before adding new info
 
-    const spacer = document.createElement('div')
-    const catInventoryContainer = document.createElement('div')
-    spacer.setAttribute('id', 'cat-spacer')
+    // const spacer = document.createElement('div')
+     const catInventoryContainer = document.createElement('div')
+    // spacer.setAttribute('id', 'cat-spacer')
     const backButtonContainer = document.createElement('div')
     backButtonContainer.setAttribute('id', 'cat-back-button-container')
 
@@ -293,7 +305,7 @@ const seeFullInventoryByCat = (category, books) =>{
 
 
     catInventoryContainer.setAttribute('id','cat-inventory-container')
-    displayDiv.appendChild(spacer)
+    // displayDiv.appendChild(spacer)
     displayDiv.appendChild(catInventoryContainer)
     displayDiv.appendChild(backButtonContainer)
 
@@ -453,7 +465,7 @@ const shoppingCartDisplay = () => {
       shoppingCartDisplay.appendChild(shoppingCartCover)
 
       const bookCover = document.createElement('div')
-      bookCover.setAttribute('class', 'book-cover')
+      bookCover.setAttribute('class', 'book-cover-cart')
       shoppingCartCover.appendChild(bookCover)
 
       const bookCoverContent = document.createElement('img')
