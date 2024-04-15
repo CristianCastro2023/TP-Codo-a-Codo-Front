@@ -8,6 +8,7 @@ const CATEGORIES = ['ficción', 'historia', 'recetas', 'cómics'];//add categori
 let PAGE_TITLE = 'AUREA';
 
 const books = displayBooks;
+console.log(displayBooks)
 
 const favBooks = [];
 
@@ -191,7 +192,7 @@ const categoriesDisplay = (category, books) => {
 
 
     // Iterate over the filtered books and create elements for each book
-    filteredBooks.forEach(book => {
+    filteredBooks.slice(0, 4).forEach(book => {
       const bookContainer = document.createElement('div');
       bookContainer.classList.add('book-container');
       bookContainer.setAttribute('id', `${book.title}`)
