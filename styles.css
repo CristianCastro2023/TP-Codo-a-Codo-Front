@@ -41,7 +41,9 @@ body{
     font-weight: bolder;
     color: var(--light-background-color);
 }
-
+#primary-title:hover{
+cursor: pointer;
+}
 #toggle-menu-button{
     display: none;
   }
@@ -221,17 +223,21 @@ body{
 }
 
 #seeMoreButton{
-background-color: transparent;
+background-color: var(--main-color-dark);
 font-weight: bolder;
 border: none;
-color: var(--main-color-dark);
+color: var(--main-accent-color);
 font-size: 20px;
 height: 40px;
 width: auto;
+margin-right: 20px;
+border-radius: 8px;
 }
 
 #seeMoreButton:hover{
 cursor: pointer;
+background-color: var(--main-accent-color);
+color: var(--main-color-dark);
 }
 
 /*INVENTORY SCREEN*/
@@ -286,6 +292,11 @@ cursor: pointer;
  .inventory-item-quantity-price-container{
     font-size: 12px;
  }
+
+ .inventory-item-buttons-container{
+    width: 10vw;
+ }
+
 
 #home{
     background-color: var(--light-background-color);
@@ -463,6 +474,10 @@ cursor: pointer;
 
 @media only screen and (max-width: 767px){
   /*HERE STARTS THE NAVBAR*/
+
+  #primary-title:hover{
+    cursor: pointer;
+    }
 
   #navbar {
     position: absolute;
@@ -773,6 +788,8 @@ padding-top: 1%;
  .inventory-item-quantity-price-container{
     font-size: 12px;
  }
+
+
 
  /*WISHLIST*/
  

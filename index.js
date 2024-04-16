@@ -31,10 +31,16 @@ const navBar = (arr, name) => {
   navbar.setAttribute("id", "navbar");
   navbar.classList.add('hidden')
 
-  const title = document.createElement('div');
-  title.setAttribute('id', 'page-title');
+  const titleContainer = document.createElement('div');
+  titleContainer.setAttribute('id', 'page-title');
+  navbar.appendChild(titleContainer);
+  
+
+  const title = document.createElement('div')
   title.textContent = name;
-  navbar.appendChild(title);
+  title.setAttribute('id', 'primary-title')
+
+  titleContainer.appendChild(title);
 
   title.onclick = () => {
     displayDiv.innerHTML = ''
@@ -48,8 +54,8 @@ const navBar = (arr, name) => {
   searchBar.setAttribute('type', 'text');
   searchBar.setAttribute('placeholder', 'buscar libros...')
 
-  title.appendChild(searchBar);
-  title.appendChild(toggleMenuButton);
+  titleContainer.appendChild(searchBar);
+  titleContainer.appendChild(toggleMenuButton);
   
 
   toggleMenuButton.setAttribute('id', 'toggle-menu-button')
@@ -211,7 +217,7 @@ const categoriesDisplay = (category, books) => {
       const bookTitle = document.createElement('h2');
 
       if(book.title.length > 15){
-        bookTitle.textContent = book.title.slice(0, 10) + '...';
+        bookTitle.textContent = book.title.slice(0, 15) + '...';
       } else (
         bookTitle.textContent = book.title
       )
@@ -315,6 +321,7 @@ const seeFullInventoryByCat = (category, books) =>{
       console.log(book)
       const inventoryItemRow = document.createElement('div')
       inventoryItemRow.classList.add('inventory-item-row')
+      inventoryItemRow.setAttribute('id', `${book.title}` )
 
       const inventoryItemContainer = document.createElement('div')
       inventoryItemContainer.classList.add('inventory-item-container')
@@ -354,9 +361,32 @@ const seeFullInventoryByCat = (category, books) =>{
       inventoryItemQuantityPriceContainer.appendChild(inventoryItemQuantity)
       inventoryItemQuantityPriceContainer.appendChild(inventoryItemPrice)
 
+      const inventoryItemButtonsContainer = document.createElement('div')
+      inventoryItemButtonsContainer.classList.add('inventory-item-buttons-container')
+
+      const addToCartButton = document.createElement('button')
+      addToCartButton.classList.add('add-to-cart-button')
+      inventoryItemButtonsContainer.appendChild(addToCartButton)
+      addToCartButton.textContent = 'Comprar'
+      addToCartButton.onclick = () => {
+        cartArray.push(book)
+        console.log(cartArray)
+      }
+      
+      const addToFavsButton = document.createElement('button')
+      addToFavsButton.classList.add('add-to-favs-button')
+      inventoryItemButtonsContainer.appendChild(addToFavsButton)
+      addToFavsButton.textContent = 'Favoritos'
+      addToFavsButton.onclick = () => {
+        const title = inventoryItemRow.id
+        favBooks.push(title)
+        console.log(favBooks)
+      }
+
       inventoryItemContainer.appendChild(inventoryItemImageContainer)
       inventoryItemContainer.appendChild(inventoryItemTitleAuthorContainer)
       inventoryItemContainer.appendChild(inventoryItemQuantityPriceContainer)
+      inventoryItemContainer.appendChild(inventoryItemButtonsContainer)
 
       inventoryItemRow.appendChild(inventoryItemContainer)
 
