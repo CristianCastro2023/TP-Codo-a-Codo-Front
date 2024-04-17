@@ -4,6 +4,7 @@
     --main-accent-color :#FF6542;
     --secondary-accent-color: #779FA1;
     --light-background-color: #E0CBA8;
+    --black-transparent : rgba(0, 0, 0, 0.5);
     font-family: Poppins, sans-serif;
 }
 
@@ -15,7 +16,7 @@ body{
 @media only screen and (min-width: 768px){
 
 #navbar{
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100vw;
     height: 6vh;
@@ -40,7 +41,9 @@ body{
     font-weight: bolder;
     color: var(--light-background-color);
 }
-
+#primary-title:hover{
+cursor: pointer;
+}
 #toggle-menu-button{
     display: none;
   }
@@ -108,44 +111,66 @@ body{
     overflow: hidden;
 }
 
+#placeholder{
+    width: 100%;
+    height: 100vh;
+    margin-top: 0;
+    background-image: url('./assets/carousel-images/img1.jpg');
+    background-size: cover;
+    transition: background-image 0.5s ease;
+}
+
+#slogan{
+    margin-top: 10%;
+    font-weight: bolder;
+    font-size: 72px;
+    color: var(--main-color-light);
+}
+
+#description{
+    font-weight: bold;
+    font-size: 48px;
+    color: var(--main-color-dark);
+}
+
+#banner{
+    background-color: green;
+    width: 100%;
+    height: 40%;
+}
+
 /*CATEGORIES PICKS*/
 
-#seeMoreButton{
-   margin-top: 40vh;
-   margin-left: 80vw;
-}
 
 #title{
     color: var(--main-color-light);
     font-size: 40px;
-    margin-top: 10vh;
-    margin-bottom: -40px;
+    margin-top: 0;
+
 }
 #cover-container{
+    margin-top: 4%;
     width: 100%;
     height: 40vh;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .book-container{
-    margin-top: 20%;    
+    margin-top: 2%;    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    width: 250px;
-    height: 400px;
-    background-color: var(--main-accent-color);
+    width: 299px;
+    height: 420px;
     padding-bottom: 5px;
     box-shadow: 10px 22px 17px 7px rgba(0,0,0,0.4);
 }
 .book-cover{
-    margin-top: 25px;
-    width: 100px;
-    height: 150px;
+    display: none;
 }
 
 .book-container > h2{
@@ -155,29 +180,123 @@ body{
     margin: auto;
 }
 
-.book-container > .book-container-info-container > button {
-    background-color: var(--main-accent-color);
+.book-container > .book-container-info-container{
+    background-color: var(--black-transparent);
+    width: 100%;
+    color: var(--light-background-color);
+}
+
+
+
+.book-container > .book-container-info-container > .book-container-info-buttons-container {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 5px;
+}
+
+.book-container > .book-container-info-container > .book-container-info-buttons-container > button {
+    background-color: transparent;
+    color: var(--main-accent-color);
     border: none;
     font-weight: bolder;
     font-size: 20px;
-    color: var(--main-color-dark);
+    border-radius: 8px;
 }
 
-.book-container > button:hover {
+.book-container > .book-container-info-container > .book-container-info-buttons-container > button:hover {
+    background-color: var(--main-color-dark);
     cursor: pointer;
 }
 
+.book-container > .book-container-info-container > .book-container-info-text-container {
+    margin-left: 5px;
+}
+
+.see-more-container{
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 #seeMoreButton{
-background-color: var(--light-background-color);
+background-color: var(--main-color-dark);
 font-weight: bolder;
 border: none;
-color: var(--main-color-dark);
+color: var(--main-accent-color);
 font-size: 20px;
+height: 40px;
+width: auto;
+margin-right: 20px;
+border-radius: 8px;
 }
 
 #seeMoreButton:hover{
 cursor: pointer;
+background-color: var(--main-accent-color);
+color: var(--main-color-dark);
 }
+
+/*INVENTORY SCREEN*/
+
+
+#cat-back-button-container{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+ }
+
+ #cat-back-button{
+    font-weight: bolder;
+    color: var(--main-color-dark);
+    border: none;
+    background-color: var(--light-background-color);
+    font-size: large;
+ }
+ #cat-inventory-container{
+    margin-top: 5%;
+    width: 100%;
+ }
+
+ .inventory-item-row{
+    width: 100%;
+ }
+ 
+ .inventory-item-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+ }
+
+ .inventory-item-image{
+    height: 280px;
+    width: 180px;
+ }
+
+ .inventory-item-title-author-container{
+    margin-left: 5px;
+    font-size: large;
+    width: 40%;
+ }
+
+ .inventory-item-quantity-price-container{
+    font-size: 12px;
+ }
+
+ .inventory-item-buttons-container{
+    width: 10vw;
+ }
+
 
 #home{
     background-color: var(--light-background-color);
@@ -257,12 +376,6 @@ cursor: pointer;
     align-items: center;
 }
 
-#placeholder{
-    height: 60vh;
-    width: 80vw;
-    background-color: red;
-    border-radius: 28px;
-}
 
 #footer{
     position: fixed;
@@ -361,14 +474,71 @@ cursor: pointer;
         z-index: 4; /* Z-index original del footer */
     }
 }
+
+/*LOGIN AND ACC CREATION*/
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--light-background-color);
+    padding: 10px;
+    border-radius: 16px;
+    width: 50vw;
+  }
+  
+  #close-button-container{
+    display: flex;
+    justify-content: flex-end;
+}
+#form-close-button{
+    background: none;
+    border: none;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+#form-close-button:hover{
+    cursor: pointer;
+    background-color: var(--main-color-dark);
+    color: var(--main-accent-color);
+}
+
+  #login-form>input {
+    border-radius: 8px;
+    border: none;
+    height: 20px;
+  }
+  
+  #create-account-button {
+    background-color: var(--main-color-light);
+    color: var(--light-background-color);
+    border: none;
+    border-radius: 8px;
+    height: 20px;
+  }
+  
+  #login-modal-bg {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
 }
 
 /*SMALL SCREENS*/
 
 
 
-  @media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px){
   /*HERE STARTS THE NAVBAR*/
+
+  #primary-title:hover{
+    cursor: pointer;
+    }
 
   #navbar {
     position: absolute;
@@ -384,11 +554,36 @@ cursor: pointer;
     border: none;
 }
 
-#display-div{
-    height: 100vh;
+#placeholder{
+    margin-top: 12%;
+    height: 100%;
+    width: 100%;
+    background-image: url('./assets/carousel-images/img2.jpg');
+    background-size: cover;
 }
 
+#slogan{
+    font-weight: bolder;
+    font-size: 48px;
+    color: var(--light-background-color);
+}
+
+#description{
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--light-background-color);
+}
+
+#banner{
+    background-color: green;
+    width: 100%;
+    height: 100px;
+    margin-top: 10%;
+    margin-bottom: 0;
+}
 /*NAVBAR COLLIPSIBLE FUNCTION*/
+
+
   .hidden {
     height: 6vh; /* Set the height of the hidden navbar */
   }
@@ -530,7 +725,8 @@ padding-top: 1%;
      align-items: center;
      width: 100%;
      height: 400px;
-     background-color: var(--main-accent-color);
+     background-image: none;
+     background-color: var(--main-accent-color) !important;
      box-shadow: 10px 22px 17px 7px rgba(0,0,0,0.4);
  }
  .book-container-info-container{
@@ -538,7 +734,33 @@ padding-top: 1%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    background-color: var(--main-accent-color);
  }
+
+ .book-container-info-text-container{
+    background-color: var(--black-transparent);
+    color: var(--light-background-color);
+ }
+
+ .book-container-info-buttons-container{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+ }
+
+ .book-container-info-buttons-container > button{
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+    font-weight: bolder;
+    background-color: var(--main-color-dark);
+    color: var(--main-accent-color);
+ }
+
+
  .book-cover{
      height: 400px;
      width: 280px;
@@ -577,10 +799,6 @@ padding-top: 1%;
 
  /*INVENTORY SCREEN*/
 
- #cat-spacer{
-    width: 100%;
-    height: 8%;
- }
 
  #cat-back-button-container{
     position: absolute;
@@ -601,8 +819,8 @@ padding-top: 1%;
     background-color: var(--light-background-color);
     font-size: large;
  }
- .cat-inventory-container{
-    height: 80vh;
+ #cat-inventory-container{
+    margin-top: 15%;
     width: 100%;
  }
 
@@ -631,6 +849,8 @@ padding-top: 1%;
  .inventory-item-quantity-price-container{
     font-size: 12px;
  }
+
+
 
  /*WISHLIST*/
  
@@ -702,7 +922,7 @@ padding-top: 1%;
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 4;
+    z-index: 6;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -749,82 +969,50 @@ padding-top: 1%;
 .book-info{
     margin-left: 4%;
 }
+/*LOGIN AND ACC CREATION*/
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--light-background-color);
+    padding: 10px;
+    width: 100vw;
+    padding-bottom: 50px;
+  }
   
+#close-button-container{
+    display: flex;
+    justify-content: flex-end;
 }
-/* Estilos del footer para pantallas grandes */
-.pie-pagina {
-    width: 100%;
-    background-color: #0a141d;
-    color: white;
-}
-
-/* Estilos para el grupo 1 del footer en pantallas grandes */
-.pie-pagina .grupo-1 {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 50px;
-    padding: 45px 0px;
+#form-close-button{
+    background: none;
+    border: none;
+    font-weight: bolder;
 }
 
-/* Estilos para el grupo 2 del footer en pantallas grandes */
-.pie-pagina .grupo-2 {
-    background-color: #0a1a2a;
-    padding: 15px 10px;
-    text-align: center;
-    color: #fff;
-}
+  #login-form>input {
+    border-radius: 8px;
+    border: none;
+    height: 20px;
+  }
+  
+  #create-account-button {
+    background-color: var(--main-color-light);
+    color: var(--light-background-color);
+    border: none;
+    border-radius: 8px;
+    height: 20px;
+  }
+  
+  #login-modal-bg {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  }
 
-/* Estilos para los íconos de redes sociales en pantallas grandes */
-.pie-pagina .grupo-1 .red-social a {
-    /* Si necesitas ajustar el tamaño de los íconos, puedes hacerlo aquí */
-    display: inline-block;
-    text-decoration: none;
-    width: 45px; /* Tamaño de los íconos */
-    height: 45px; /* Tamaño de los íconos */
-    line-height: 45px;
-    color: #fff;
-    margin-right: 10px;
-    background-color: #0d2033;
-    text-align: center;
-    transition: all 300ms ease;
-}
-
-/* Estilos para el texto en el footer en pantallas grandes */
-.pie-pagina .grupo-2 small {
-    font-size: 15px;
-}
-
-#datos-clima {
-    text-align: center;
-}
-
-/* Estilos del footer para dispositivos móviles */
-@media screen and (max-width: 768px) {
-    .pie-pagina {
-        padding: 15px 10px;
-    }
-
-    .pie-pagina .grupo-1 {
-        grid-template-columns: repeat(1, 1fr);
-        grid-gap: 30px;
-        padding: 35px 0px;
-    }
-    
-    .pie-pagina .grupo-1 .box figure img {
-        width: 100px; /* Ajusta el tamaño de las imágenes de las redes sociales en dispositivos móviles */
-    }
-}
-
-.contact-link {
-    color: white; /* Cambia el color del texto */
-    text-decoration: none; /* Elimina el subrayado predeterminado */
-    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
-    /* Agrega otros estilos según tus preferencias */
-}
-
-.contact-link:hover {
-    text-decoration: underline; /* Agrega subrayado al pasar el mouse */
-}
