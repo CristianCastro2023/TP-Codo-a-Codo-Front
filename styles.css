@@ -472,22 +472,41 @@ color: var(--main-color-dark);
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: red;
+    background-color: var(--light-background-color);
     padding: 10px;
     border-radius: 16px;
     width: 50vw;
   }
   
+  #close-button-container{
+    display: flex;
+    justify-content: flex-end;
+}
+#form-close-button{
+    background: none;
+    border: none;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+#form-close-button:hover{
+    cursor: pointer;
+    background-color: var(--main-color-dark);
+    color: var(--main-accent-color);
+}
+
   #login-form>input {
     border-radius: 8px;
     border: none;
+    height: 20px;
   }
   
   #create-account-button {
-    background-color: aqua;
-    color: red;
+    background-color: var(--main-color-light);
+    color: var(--light-background-color);
     border: none;
     border-radius: 8px;
+    height: 20px;
   }
   
   #login-modal-bg {
@@ -942,4 +961,49 @@ padding-top: 1%;
 .book-info{
     margin-left: 4%;
 }
+/*LOGIN AND ACC CREATION*/
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--light-background-color);
+    padding: 10px;
+    width: 100vw;
+    padding-bottom: 50px;
+  }
+  
+#close-button-container{
+    display: flex;
+    justify-content: flex-end;
+}
+#form-close-button{
+    background: none;
+    border: none;
+    font-weight: bolder;
+}
+
+  #login-form>input {
+    border-radius: 8px;
+    border: none;
+    height: 20px;
+  }
+  
+  #create-account-button {
+    background-color: var(--main-color-light);
+    color: var(--light-background-color);
+    border: none;
+    border-radius: 8px;
+    height: 20px;
+  }
+  
+  #login-modal-bg {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
   }

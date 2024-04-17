@@ -1,4 +1,4 @@
-import { cartArray, favBooks } from "../assets/arrays.js";
+import { cartArray } from "../assets/arrays.js";
 import { homeDisplay } from "./homeDisplay.js";
 
 

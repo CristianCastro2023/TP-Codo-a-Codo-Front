@@ -1,4 +1,7 @@
+import {homeDisplay} from './homeDisplay.js'
+
 export const logInDisplay = () => {
+
     const body = document.querySelector('body');
     const loginModal = document.createElement("div");
     loginModal.setAttribute("id", "login-modal-bg");
@@ -10,7 +13,28 @@ export const logInDisplay = () => {
     loginForm.setAttribute("id", "login-form");
     
     loginModal.appendChild(loginForm);
+
+    const closeButtonContainer = document.createElement( 'div' );
+    closeButtonContainer.setAttribute('id', 'close-button-container')
     
+    const closeButton = document.createElement('button')
+    closeButton.setAttribute('id', 'form-close-button')
+    closeButton.textContent = 'X'
+
+    closeButton.addEventListener('click', ()=>{
+      loginModal.remove()
+      homeDisplay()
+    })
+
+    closeButtonContainer.appendChild(closeButton)
+
+    const emailLabel = document.createElement('div')
+    emailLabel.setAttribute('id', 'email-label')
+    emailLabel.textContent = 'ingrese su correo electronico'
+
+    const passwordLabel = document.createElement('div')
+    passwordLabel.setAttribute('id', 'password-label')
+    passwordLabel.textContent = 'ingrese su contraseña'
     
     const emailInput = document.createElement("input");
     emailInput.setAttribute("type", "email");
@@ -29,7 +53,10 @@ export const logInDisplay = () => {
     createAccountButton.setAttribute("id","create-account-button");
     createAccountButton.textContent = "Crear cuenta";
     
+    loginForm.appendChild(closeButtonContainer)
+    loginForm.appendChild(emailLabel);
     loginForm.appendChild(emailInput);
+    loginForm.appendChild(passwordLabel);
     loginForm.appendChild(passwordInput);
     loginForm.appendChild(loginButton);
     loginForm.appendChild(createAccountButton);
