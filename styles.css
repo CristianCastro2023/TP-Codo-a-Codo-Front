@@ -396,7 +396,7 @@ color: var(--main-color-dark);
     align-items: center;
 }
 
-#shoppingcart-container{
+#shoppingcart-container {
     height: 80vh;
     width: 65vw;
     background-color: antiquewhite;
@@ -404,6 +404,7 @@ color: var(--main-color-dark);
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 5; /* Ajuste del z-index para que el carrito esté siempre encima */
 }
 
 .shoppingcart-container-large > #shopping-cart-display{
@@ -464,7 +465,14 @@ color: var(--main-color-dark);
 #footer{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end;#footer {
+        position: fixed;
+        bottom: 0;
+        height: 5vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 4; /* Z-index original del footer */
+    }
 }
 
 /*LOGIN AND ACC CREATION*/
@@ -961,6 +969,7 @@ padding-top: 1%;
 .book-info{
     margin-left: 4%;
 }
+
 /*LOGIN AND ACC CREATION*/
 #login-form {
     display: flex;
@@ -1007,3 +1016,83 @@ padding-top: 1%;
     z-index: 10;
   }
   }
+
+  
+}
+/* Estilos del footer para pantallas grandes */
+/*.pie-pagina {
+    width: 100%;
+    background-color: #0a141d;
+    color: white;
+}
+
+/* Estilos para el grupo 1 del footer en pantallas grandes */
+/*.pie-pagina .grupo-1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0px;
+}
+
+/* Estilos para el grupo 2 del footer en pantallas grandes */
+/*.pie-pagina .grupo-2 {
+    background-color: #0a1a2a;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Estilos para los íconos de redes sociales en pantallas grandes */
+/*.pie-pagina .grupo-1 .red-social a {
+    /* Si necesitas ajustar el tamaño de los íconos, puedes hacerlo aquí */
+  /*  display: inline-block;
+    text-decoration: none;
+    width: 45px; /* Tamaño de los íconos */
+   /* height: 45px; /* Tamaño de los íconos */
+   /* line-height: 45px;
+    color: #fff;
+    margin-right: 10px;
+    background-color: #0d2033;
+    text-align: center;
+    transition: all 300ms ease;
+}*/
+
+/* Estilos para el texto en el footer en pantallas grandes */
+/*.pie-pagina .grupo-2 small {
+    font-size: 15px;
+}
+
+#datos-clima {
+    text-align: center;
+}
+
+/* Estilos del footer para dispositivos móviles */
+/*@media screen and (max-width: 768px) {
+    .pie-pagina {
+        padding: 15px 10px;
+    }
+
+    .pie-pagina .grupo-1 {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 30px;
+        padding: 35px 0px;
+    }
+    
+    .pie-pagina .grupo-1 .box figure img {
+        width: 100px; /* Ajusta el tamaño de las imágenes de las redes sociales en dispositivos móviles */
+    
+
+
+/*.contact-link {
+    color: white; /* Cambia el color del texto */
+    /*text-decoration: none; /* Elimina el subrayado predeterminado */
+    /*margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+    /* Agrega otros estilos según tus preferencias */
+}
+
+/*.contact-link:hover {
+    text-decoration: underline; /* Agrega subrayado al pasar el mouse */
+/*}*/
