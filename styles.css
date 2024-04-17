@@ -133,11 +133,7 @@ cursor: pointer;
     color: var(--main-color-dark);
 }
 
-#banner{
-    background-color: green;
-    width: 100%;
-    height: 40%;
-}
+
 
 /*CATEGORIES PICKS*/
 
@@ -574,13 +570,7 @@ color: var(--main-color-dark);
     color: var(--light-background-color);
 }
 
-#banner{
-    background-color: green;
-    width: 100%;
-    height: 100px;
-    margin-top: 10%;
-    margin-bottom: 0;
-}
+
 /*NAVBAR COLLIPSIBLE FUNCTION*/
 
 
@@ -1016,3 +1006,69 @@ padding-top: 1%;
   }
   }
 
+/* Estilos del footer para pantallas grandes */
+.pie-pagina {
+    width: 100%;
+    background-color: #0a141d;
+    color: white;
+}
+
+/* Estilos para el grupo 1 del footer en pantallas grandes */
+.pie-pagina .grupo-1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px;
+    padding: 45px 0px;
+}
+
+/* Estilos para el grupo 2 del footer en pantallas grandes */
+.pie-pagina .grupo-2 {
+    background-color: #0a1a2a;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Estilos para los íconos de redes sociales en pantallas grandes */
+.pie-pagina .grupo-1 .red-social a {
+    /* Si necesitas ajustar el tamaño de los íconos, puedes hacerlo aquí */
+    display: inline-block;
+    text-decoration: none;
+    width: 45px; /* Tamaño de los íconos */
+    height: 45px; /* Tamaño de los íconos */
+    line-height: 45px;
+    color: #fff;
+    margin-right: 10px;
+    background-color: #0d2033;
+    text-align: center;
+    transition: all 300ms ease;
+}
+
+/* Estilos para el texto en el footer en pantallas grandes */
+.pie-pagina .grupo-2 small {
+    font-size: 15px;
+}
+
+#datos-clima {
+    text-align: center;
+}
+
+/* Estilos del footer para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .pie-pagina {
+        padding: 15px 10px;
+    }
+
+    .pie-pagina .grupo-1 {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 30px;
+        padding: 35px 0px;
+    }
+    
+    .pie-pagina .grupo-1 .box figure img {
+        width: 100px; /* Ajusta el tamaño de las imágenes de las redes sociales en dispositivos móviles */
+    }
+}
