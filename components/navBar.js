@@ -1,20 +1,28 @@
-import { cartArray, favBooks } from "../assets/arrays.js";
-
 import { logInDisplay } from "./logInDisplay.js";
 import { shoppingCartDisplay } from "./shoppingCartDisplay.js";
 import { categoriesDisplay } from "./categoriesDisplay.js";
-import { displayBooks } from "../assets/lookUp.js";
+import { displayBooks, favoriteItems } from "../assets/lookUp.js";
 import { wishlistDisplay } from "./wishlistDisplay.js";
+import { homeDisplay } from "./homeDisplay.js";
+import { adminDisplay } from "./adminDisplay.js";
+import { userDisplay } from "./userDisplay.js";
 
-const books = displayBooks
+
+
+const books = displayBooks  
 
 
 
+
+const CATEGORIES = ['ficción', 'historia', 'recetas', 'cómics'];
 let PAGE_TITLE = 'AUREA';
 
-export const navBar = (arr, name) => {
+export const navBar = ( logged, role, userID) => {
+  
+ 
+
     const displayDiv = document.querySelector('#display-div')
-    const menuCategories = arr;
+    const menuCategories = CATEGORIES;
     const navbarContainer = document.querySelector(`#navbar-container`);
     const navbar = document.createElement("nav");
     navbarContainer.appendChild(navbar);
@@ -27,7 +35,7 @@ export const navBar = (arr, name) => {
     
   
     const title = document.createElement('div')
-    title.textContent = name;
+    title.textContent = PAGE_TITLE;
     title.setAttribute('id', 'primary-title')
   
     titleContainer.appendChild(title);
@@ -76,12 +84,25 @@ export const navBar = (arr, name) => {
     logIn.classList.add('navbar-button');
     logIn.setAttribute('id', 'navbar-login');
     logIn.innerHTML = '<span class="material-symbols-outlined">account_circle</span>';
+
+    const admin = document.createElement("div");
+    admin.classList.add('navbar-button');
+    admin.setAttribute('id', 'navbar-admin');
+    admin.innerHTML = '<span class="material-symbols-outlined">shield_person</span>';
+  
+    
+
   
     navbar.appendChild(categoriesBtn);
     navbar.appendChild(wishlist);
     navbar.appendChild(shoppingCart);
     navbar.appendChild(logIn);
-  
+    if(role === 'admin'){
+      navbar.appendChild(admin)
+      logIn.remove()
+    }
+    
+   
     const deployMenu = document.createElement('div');
     deployMenu.setAttribute('id', 'deploy-menu');
     deployMenu.className = 'hidden-menu';
@@ -118,20 +139,41 @@ export const navBar = (arr, name) => {
     };
   
     wishlist.addEventListener('click', () => {
-      displayDiv.innerHTML = ''
-      wishlistDisplay(favBooks)
-      navbar.classList.remove('show')
+      if(logged){
+        displayDiv.innerHTML = ''
+        wishlistDisplay(logged, role, userID)
+        navbar.classList.remove('show')
+      } else {
+        window.alert('Debe estar loggeado para realizar esta acción')
+      }
+      
     })
   
     shoppingCart.addEventListener('click', () => {
       displayDiv.innerHTML = ''
-      shoppingCartDisplay(cartArray)
+      shoppingCartDisplay(userID)
       navbar.classList.remove('show')
     })
   
     logIn.addEventListener('click', ()=>{
+      if(logged){
+        displayDiv.innerHTML = ''
+        userDisplay()
+        navbar.classList.remove('show')
+      }else{
+        displayDiv.innerHTML = ''
+        logInDisplay()
+        navbar.classList.remove('show')
+      }
+
+    })
+
+    admin.addEventListener('click', ()=>{
       displayDiv.innerHTML = ''
-      logInDisplay()
+      adminDisplay()
       navbar.classList.remove('show')
     })
+
+
+
   }
