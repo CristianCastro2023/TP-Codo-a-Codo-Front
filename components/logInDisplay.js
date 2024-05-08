@@ -1,4 +1,10 @@
 import {homeDisplay} from './homeDisplay.js'
+import { createAccountDisplay } from './createAccount.js';
+import { setLoggedIn } from '../assets/userAuth.js';
+import { userInfo } from '../assets/lookUp.js';
+import { createInput, appendMultipleChildrens } from '../assets/helperFunctions.js';
+
+const users = userInfo
 
 export const logInDisplay = () => {
 
@@ -27,6 +33,7 @@ export const logInDisplay = () => {
     })
 
     closeButtonContainer.appendChild(closeButton)
+    /*-----------------INPUTS-------------------*/
 
     const emailLabel = document.createElement('div')
     emailLabel.setAttribute('id', 'email-label')
@@ -35,14 +42,13 @@ export const logInDisplay = () => {
     const passwordLabel = document.createElement('div')
     passwordLabel.setAttribute('id', 'password-label')
     passwordLabel.textContent = 'ingrese su contraseña'
-    
-    const emailInput = document.createElement("input");
-    emailInput.setAttribute("type", "email");
-    emailInput.setAttribute("name", "email");
-    
-    const passwordInput = document.createElement("input");
-    passwordInput.setAttribute("type", "password");
-    passwordInput.setAttribute("name", "password");
+
+
+    const emailInput = createInput('email', 'email', 'Email...')
+    emailInput.classList.add('input-correct')
+
+    const passwordInput = createInput('password', 'password', 'Contraseña')
+    passwordInput.classList.add('input-correct')
     
     const loginButton = document.createElement("input");
     loginButton.setAttribute("type", "submit");
@@ -52,14 +58,24 @@ export const logInDisplay = () => {
     const createAccountButton = document.createElement("button");
     createAccountButton.setAttribute("id","create-account-button");
     createAccountButton.textContent = "Crear cuenta";
+
+    createAccountButton.addEventListener('click', ()=>{
+      loginModal.remove()
+      createAccountDisplay()
+    })
     
-    loginForm.appendChild(closeButtonContainer)
-    loginForm.appendChild(emailLabel);
-    loginForm.appendChild(emailInput);
-    loginForm.appendChild(passwordLabel);
-    loginForm.appendChild(passwordInput);
-    loginForm.appendChild(loginButton);
-    loginForm.appendChild(createAccountButton);
+    appendMultipleChildrens(loginForm, 
+      [
+        closeButtonContainer, 
+        emailLabel, 
+        emailInput, 
+        passwordLabel, 
+        passwordInput, 
+        loginButton, 
+        createAccountButton
+      ])
+
+    /*-----------------API FUNCTIONS-------------------*/
     
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -69,15 +85,30 @@ export const logInDisplay = () => {
       const email = formData.get("email");
       const password = formData.get("password");
     
-      console.log(email, password);
+  
     
-      //const isValid = validateLoginForm(formData);
+      const user = users.find(user => user.email === email);
     
-      //if (isValid) {
-      //    await submitLoginForm(formData);
-      //} else {
-      //    alert('Please fill in all fields.');
-      //}
+      if (user) {
+        if (user.password === password){
+         
+   
+          setLoggedIn(true, user.role, user.user_id)
+          
+          loginModal.remove()
+          homeDisplay()
+        } else {
+          console.log('failed')
+        }
+      } else {
+        console.log('user not found ')
+        emailInput.classList.remove('input-correct')
+        emailInput.classList.toggle('input-error')
+        
+        passwordInput.classList.remove('input-correct')
+        passwordInput.classList.toggle('input-error')
+        window.alert('El usuario o contraseña son  incorrectos')
+      }
     });
     
     }
