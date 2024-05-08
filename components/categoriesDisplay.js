@@ -1,9 +1,22 @@
 import { seeFullInventoryByCat } from "./seeFullInventoryByCat.js";
-import { cartArray, favBooks } from "../assets/arrays.js";
+import { cartArray } from "../assets/arrays.js";
+import { getLoggedIn, getUserId, getUserRole } from "../assets/userAuth.js";
+import { appendMultipleChildrens } from "../assets/helperFunctions.js";
+import { favoritesdb, ordersdb } from "../assets/lookUp.js";
+import { initLoadingAnimation, closeLoadingAnimation } from "../assets/helperFunctions.js";
 
 let cart = cartArray
 
+
 export const categoriesDisplay = (category, books) => {
+
+ 
+
+  const log = getLoggedIn()
+  const role = getUserRole()
+  const userId = getUserId()
+
+
     const displayDiv = document.querySelector('#display-div')
     const fetchBooks = (category, books) => {
   
@@ -11,8 +24,14 @@ export const categoriesDisplay = (category, books) => {
       if (!mainDiv) {
         mainDiv = document.createElement('div');
         mainDiv.setAttribute("id", "main-div");
+        mainDiv.setAttribute ('style', `background-image: url(front/assets/wallpapers/${category}-wallpaper.jpg)`)
         displayDiv.appendChild(mainDiv);
+        
       }
+
+      const overlay = document.createElement('div');
+      overlay.classList.add('overlay')
+
       const title = document.createElement('h1');
       title.setAttribute("id", "title");
       title.textContent = `Esta es nuestra selección del género ${category}`;
@@ -27,11 +46,12 @@ export const categoriesDisplay = (category, books) => {
   
   
       // Iterate over the filtered books and create elements for each book
-      filteredBooks.slice(0, 4).forEach(book => {
+      filteredBooks.slice(0, 5).forEach(book => {
         const bookContainer = document.createElement('div');
         bookContainer.classList.add('book-container');
         bookContainer.setAttribute('id', `${book.title}`)
         bookContainer.style.backgroundImage = `url(${book.cover})`
+        console.log(book.cover)
         bookContainer.style.backgroundSize = `cover`
   
         const bookContainerInfoContainer = document.createElement('div')
@@ -62,35 +82,66 @@ export const categoriesDisplay = (category, books) => {
         const buyButton = document.createElement('button')
         buyButton.textContent = 'Comprar'
         buyButton.onclick = () => {
-          cart.push(book);
-          console.log(cart);
+          if (role === 'admin'){
+            window.alert('El administrador no puede realizar esta acción.')
+          } else {
+          if(quantityInput.value === ''){
+            window.alert("Ingrese en el recuadro a la derecha del botón 'Comprar' cuantas unidades va a comprar (Mínimo 1).")
+          } else {
+          const currentQuantity = parseInt(quantityInput.value)
+          const bookWithQuantity = {...book, currentQuantity}
+          cart.push(bookWithQuantity);
+          }
+          
+          }
+          
         }
+
+        const quantityInput = document.createElement('input')
+        quantityInput.setAttribute('type', 'number')
+        quantityInput.setAttribute('min', '1')
+        quantityInput.setAttribute('max', `${book.quantity}`)
+        quantityInput.classList.add('quantity-input')
   
         const favButton = document.createElement('button')
         favButton.textContent = '❤️'
   
         favButton.onclick = () => {
-          const title = bookContainer.id
-          favBooks.push(title)
+          if (role === 'admin'){
+            window.alert('El administrador no puede realizar esta acción.')
+          } else {
+            if(log){
+              addFavoriteBook(userId, book.book_id)
+            } else {
+              window.alert('Debe estar loggeado para realizar esta acción')
+            }
+
+          }
+          
+          
         }
   
         const bookCover = document.createElement('img');
         bookCover.setAttribute('src', book.cover);
         bookCover.setAttribute('alt', book.title);
         bookCover.classList.add('book-cover');
-        bookContainer.appendChild(bookCover);
-        bookContainer.appendChild(bookContainerInfoContainer)
+
+        appendMultipleChildrens(bookContainer,[bookCover, bookContainerInfoContainerTextContainer])
+
   
-        bookContainerInfoContainer.appendChild(bookContainerInfoContainerTextContainer)
-        bookContainerInfoContainer.appendChild(bookContainerInfoContainerButtonsContainer)
-  
-        bookContainerInfoContainerTextContainer.appendChild(bookTitle);
-        bookContainerInfoContainerTextContainer.appendChild(bookAuthor);
-        bookContainerInfoContainerTextContainer.appendChild(bookPrice);
-        bookContainerInfoContainerButtonsContainer.appendChild(buyButton);
-        bookContainerInfoContainerButtonsContainer.appendChild(favButton);
-  
-  
+        appendMultipleChildrens(bookContainerInfoContainerTextContainer, [
+          bookTitle,
+          bookAuthor,
+          bookPrice,
+          bookContainerInfoContainerButtonsContainer,
+        ])
+        
+          appendMultipleChildrens(bookContainerInfoContainerButtonsContainer, [
+          buyButton,
+          quantityInput,
+          favButton,
+          ])
+
         coverContainer.appendChild(bookContainer);
   
       });
@@ -108,10 +159,44 @@ export const categoriesDisplay = (category, books) => {
         mainDiv.remove()
         seeFullInventoryByCat(category, books)
       })
+
+      function addFavoriteBook(user_id, book_id){
+        const favBookData = {
+          user_id: user_id,
+          book_id: book_id
+        }
+        fetch(favoritesdb, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': '*/*'
+          },
+          body: JSON.stringify(favBookData) 
+      }).then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to add favorite');
+        }
+        return response.json(); // Parse the response JSON
+    })
+    .then(data => {
+        console.log('favorite added successfully:', data);
+        // After successfully adding a book, fetch updated book data
+    })
+    .catch(error => {
+        console.error('Error adding favorite:', error.message);
+    });
+
+
+      }
+
+
+
   
     }
     try {
+      initLoadingAnimation()
       fetchBooks(category, books)
+      closeLoadingAnimation()
     } catch (e) {
       console.error('there was an issue fetching books', e)
     }
