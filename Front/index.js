@@ -1,6 +1,6 @@
 
-import { navBar } from "./components/navBar.js";
-import { homeDisplay } from "./components/homeDisplay.js";
+import { navBar } from "../components/navBar.js";
+import { homeDisplay } from "../components/homeDisplay.js";
 
 
 
