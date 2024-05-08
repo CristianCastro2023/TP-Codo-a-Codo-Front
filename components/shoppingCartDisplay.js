@@ -1,12 +1,19 @@
 import { cartArray } from "../assets/arrays.js";
+import { getLoggedIn } from "../assets/userAuth.js";
 import { homeDisplay } from "./homeDisplay.js";
+import { ordersdb } from '../assets/lookUp.js';
+import { getUserId } from "../assets/userAuth.js";
+import { createModal } from "../assets/helperFunctions.js";
 
 
 
-export const shoppingCartDisplay = () => {
+export const shoppingCartDisplay = (shoppingCart, parameter) => {
+
+
 
   let cart = cartArray
 
+  const log = getLoggedIn()
     const fetchShoppinCart = (cart) => {
 
     const body = document.querySelector('body');
@@ -64,14 +71,14 @@ export const shoppingCartDisplay = () => {
   
         const bookTitle = document.createElement('h2')
         bookTitle.textContent = book.title;
-  
+        
         const additionalInfo = document.createElement('p')
-        additionalInfo.textContent = 'Envío sin costo!'
+        additionalInfo.textContent = `Comprás ${book.currentQuantity} unidades a $${book.price} cada uno. ¡Envío sin costo!`
   
         bookInfo.appendChild(bookTitle)
         bookInfo.appendChild(additionalInfo)
   
-        priceAcc += book.price
+        priceAcc += Number(book.price * book.currentQuantity)
         console.log(priceAcc);
       })
   
@@ -101,17 +108,46 @@ export const shoppingCartDisplay = () => {
       let boughtArr = []
   
       buyButton.onclick = () => {
-        boughtArr.push(cart)
-        cartArray.splice(0, cart.length);
-        homeDisplay()
+        if(log){
+        submitOrder()
+        createModal('La compra se realizó con exito!', modalBackground)
         return boughtArr
+        } else {
+          window.alert('Debe estar loggeado para realizar esta acción')
+        }
+        
       }
-      cancelButton.onclick = () => { console.log('cancelado') }
+      cancelButton.onclick = () => { cart = [] }
   
       closeButton.onclick = () => {
         modalBackground.remove()
         homeDisplay()
       }
+
+      async function submitOrder() {
+      
+        const items = []
+        cart.forEach(book => {
+          items.push({ bookId: book.book_id, quantity: book.currentQuantity })
+        })
+        const userId = getUserId();
+        console.log(JSON.stringify({ userId, items }));
+        try {
+          const response = await fetch(ordersdb, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId, items })
+          });
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error('Error creating order:', error);
+        }
+      }
+
+
     }
     try {
       fetchShoppinCart(cart);
