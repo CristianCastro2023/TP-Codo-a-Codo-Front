@@ -4,6 +4,7 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const fs = require('fs')
 
 
 const app = express();
@@ -23,6 +24,29 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) throw err;
   console.log('Connected to MySQL database');
+});
+
+
+app.get('/init-database', (req, res) => {
+  // Read the SQL script from the file
+  fs.readFile('init-database.sql', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading SQL file:', err);
+      res.status(500).send('Error reading SQL file');
+      return;
+    }
+    
+    // Execute the SQL script
+    connection.query(data, (err, result) => {
+      if (err) {
+        console.error('Error executing SQL script:', err);
+        res.status(500).send('Error executing SQL script');
+        return;
+      }
+      console.log('SQL script executed successfully');
+      res.send('Database initialized successfully');
+    });
+  });
 });
 
 
